@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -41,3 +42,6 @@ Route::get("channels/create", function () {
     return view('channel.create');
 });
 // end
+
+// repositories pattern
+Route::resource('customers', CustomerController::class);
