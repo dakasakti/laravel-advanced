@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Http\View\Composers\ChannelComposer;
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use App\Mixins\StrMixins;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -38,5 +40,17 @@ class AppServiceProvider extends ServiceProvider
                 "message" => $message,
             ];
         });
+
+        // view composer
+        // all view
+        // View::share('datas', ["dakasakti", "kaila"]);
+
+        // custom view
+        // View::composer(["channel.index", "channel.create"], function ($view) {
+        //     $view->with("datas", ["dakasakti", "kaila"]);
+        // });
+
+        // dedicated class
+        View::composer(["channel.*"], ChannelComposer::class);
     }
 }

@@ -27,3 +27,17 @@ Route::get("orders", function () {
 Route::get("errors", function () {
     return Response::errorJSON("KESALAHAN DI DATABASE");
 });
+
+// view composer => app/providers/appserviceprovider.php
+Route::get("channels", function () {
+    // $datas = ["dakasakti", "kaila"];
+    // return view('channel.index', compact('datas'));
+    return view('channel.index');
+});
+
+Route::get("channels/create", function () {
+    // $datas = ["dakasakti", "kaila"];
+    // return view('channel.create', compact('datas'));
+    return view('channel.create');
+});
+// end
