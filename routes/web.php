@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -45,3 +46,24 @@ Route::get("channels/create", function () {
 
 // repositories pattern
 Route::resource('customers', CustomerController::class);
+
+// middleware
+Route::get("roles", function (Request $request) {
+    if ($request->role === "admin") {
+        return redirect('/admin?role=admin');
+    }
+
+    if ($request->role === "member") {
+        return redirect('/member?role=member');
+    }
+
+    return "Query Param is required. {role=admin or role=member}";
+});
+
+Route::middleware("roles:member")->get("member", function () {
+    return "Member Page";
+});
+
+Route::middleware("roles:admin")->get("admin", function () {
+    return "Admin Page";
+});
